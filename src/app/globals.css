@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+/* Design tokens taken from the Figma mockup (Brand + Neutral palettes, Manrope/Inter fonts) */
+@theme inline {
+  --color-brand-dark-orange: #d3590b;
+  --color-brand-light-orange: #ffe8d9;
+  --color-neutral-white: #ffffff;
+  --color-neutral-grey-50: #f9fafb;
+  --color-neutral-grey-200: #e5e7eb;
+  --color-neutral-grey-800: #1f1f1f;
+  --color-neutral-grey-950: #0f0f0f;
+
+  /* Variables injected by next/font in layout.tsx */
+  --font-heading: var(--font-manrope);
+  --font-body: var(--font-inter);
+}
+
+body {
+  @apply font-body;
+}
