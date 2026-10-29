@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation'
 import { apiFetch } from '@/lib/api/client'
-import { setSession } from '@/lib/auth/session'
+import { clearSession, setSession } from '@/lib/auth/session'
 import type { LoginData } from '@/lib/api/types'
 
 export type LoginState = {
@@ -30,4 +30,10 @@ export const loginAction = async (_previousState: LoginState, formData: FormData
         return {message: 'error'}
     }
     redirect('/dashboard')
+}
+
+// Server Action: deletes the session cookie, then sends the visitor back to the login page
+export const logoutAction = async (): Promise<void> => {
+    await clearSession()
+    redirect('/login')
 }

@@ -1,4 +1,5 @@
 import type { ApiResponse } from './types'
+import { getToken } from '@/lib/auth/session';
 
 // Read on the server only: no NEXT_PUBLIC_ prefix, so the browser never sees this URL
 const API_URL = process.env.API_URL
@@ -41,4 +42,10 @@ export const apiFetch = async <T>(
             message: 'Failed to fetch.'
         }
     }
+}
+
+export const authFetch = async <T>(path: string, init?: RequestInit): Promise<ApiResponse<T>> => {
+    const token = await getToken()
+    if (!token) return { success: false, message: 'Not logged in' }
+    return apiFetch<T>(path, token, init)
 }
