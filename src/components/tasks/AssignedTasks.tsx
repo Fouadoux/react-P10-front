@@ -1,10 +1,11 @@
 import TaskCard from '@/components/tasks/TaskCard'
 import { getAssignedTasks } from '@/lib/api/dashboard'
+import { sortByPriority } from '@/lib/taskSort'
 
 // "Mes tâches assignées" panel: fetches the tasks on the server and shows one card per task.
 // Must be rendered inside a <Suspense> (it reads the session cookie at request time).
 const AssignedTasks = async () => {
-    const tasks = await getAssignedTasks()
+    const tasks = sortByPriority(await getAssignedTasks())
 
     return (
         <section className="flex flex-col gap-8 rounded-[10px] border border-neutral-grey-200 bg-neutral-white p-[54px]">
