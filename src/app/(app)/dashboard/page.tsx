@@ -4,7 +4,7 @@ import DashboardContent from '@/components/dashboard/DashboardContent'
 import Greeting from '@/components/dashboard/Greeting'
 
 type DashboardPageProps = {
-    searchParams: Promise<{ view?: string }>
+    searchParams: Promise<{ view?: string; q?: string }>
 }
 
 export default function DashboardPage({ searchParams }: DashboardPageProps) {
