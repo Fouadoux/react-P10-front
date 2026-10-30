@@ -8,6 +8,14 @@ export const STATUS_LABELS: Record<TaskStatus, string> = {
     CANCELLED: 'Annulée',
 }
 
+// One look per status, taken from the mockup colors
+export const STATUS_CLASSES: Record<TaskStatus, string> = {
+    TODO: 'bg-red-50 text-red-500',
+    IN_PROGRESS: 'bg-amber-50 text-amber-500',
+    DONE: 'bg-green-50 text-green-600',
+    CANCELLED: 'bg-neutral-grey-50 text-neutral-grey-800',
+}
+
 /**
  * Formats a task due date for the card (e.g. "2026-03-09T00:00:00.000Z" -> "9 mars").
  *

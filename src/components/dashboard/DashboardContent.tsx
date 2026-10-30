@@ -1,4 +1,5 @@
 import { Suspense } from 'react'
+import KanbanBoard from '@/components/dashboard/KanbanBoard'
 import ViewTabs from '@/components/dashboard/ViewTabs'
 import AssignedTasks from '@/components/tasks/AssignedTasks'
 import { getDashboardView } from '@/lib/dashboardView'
@@ -22,7 +23,9 @@ const DashboardContent = async ({ searchParams }: DashboardContentProps) => {
                     <AssignedTasks />
                 </Suspense>
             ) : (
-                <p className="text-neutral-grey-800">La vue Kanban arrive bientôt.</p>
+                <Suspense fallback={<p role="status" className="text-neutral-grey-800">Chargement de vos tâches…</p>}>
+                    <KanbanBoard />
+                </Suspense>
             )}
         </div>
     )
