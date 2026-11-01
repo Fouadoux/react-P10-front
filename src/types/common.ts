@@ -13,10 +13,12 @@ export type ApiSuccess<T> = {
 
 // Envelope of every failed backend response
 // `data.errors` is only present for 400 validation errors
+// `status` is the HTTP status code (401 = token refused); absent when the backend could not be reached
 export type ApiError = {
     success: false;
     message: string;
     error?: string;
+    status?: number;
     data?: {
         errors: Errors[];
     };

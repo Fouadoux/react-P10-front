@@ -1,5 +1,6 @@
 import type { ApiResponse } from '@/types'
 import { getToken } from '@/lib/auth/session';
+import { redirect } from 'next/navigation';
 
 // Read on the server only: no NEXT_PUBLIC_ prefix, so the browser never sees this URL
 const API_URL = process.env.API_URL
@@ -31,10 +32,12 @@ export const apiFetch = async <T>(
         const contentType = response.headers.get('content-type')
 
         if (!contentType?.includes('application/json')) {
-            return { success: false, message: 'Response is not JSON', error: 'INVALID_RESPONSE' }
+            return { success: false, message: 'Response is not JSON', error: 'INVALID_RESPONSE', status: response.status }
         }
 
-        return await response.json() as ApiResponse<T>
+        const body = await response.json() as ApiResponse<T>
+        // Keep the HTTP status on failures: callers need it to tell "token refused" (401) from other errors
+        return body.success ? body : { ...body, status: response.status }
     } catch (error: unknown) {
         return {
             success: false,
@@ -47,5 +50,9 @@ export const apiFetch = async <T>(
 export const authFetch = async <T>(path: string, init?: RequestInit): Promise<ApiResponse<T>> => {
     const token = await getToken()
     if (!token) return { success: false, message: 'Not logged in' }
-    return apiFetch<T>(path, token, init)
+    const res= await apiFetch<T>(path, token, init)
+    if(!res.success && res.status === 401) {
+        redirect('/api/logout')
+    }
+    return res
 }

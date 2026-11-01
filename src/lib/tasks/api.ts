@@ -5,5 +5,8 @@ import type { AssignedTasksData, Task } from '@/types'
 // Returns an empty list when nobody is logged in or when the backend refuses.
 export const getAssignedTasks = async (): Promise<Task[]> => {
     const res = await authFetch<AssignedTasksData>('/dashboard/assigned-tasks')
+    if(!res.success) {
+        throw new Error(res.message)
+    }
     return res.success ? res.data.tasks : []
 }
