@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import KanbanBoard from '@/components/dashboard/KanbanBoard'
 import ViewTabs from '@/components/dashboard/ViewTabs'
 import AssignedTasks from '@/components/tasks/AssignedTasks'
-import { getDashboardView } from '@/lib/dashboardView'
+import { getDashboardView } from '@/lib/dashboard/view'
 
 type DashboardContentProps = {
     // Query string of the page, e.g. { view: 'kanban' } for /dashboard?view=kanban

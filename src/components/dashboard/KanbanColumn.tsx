@@ -1,4 +1,4 @@
-import type { Task } from '@/lib/api/types';
+import type { Task } from '@/types';
 import KanbanCard from '@/components/tasks/KanbanCard';
 
 

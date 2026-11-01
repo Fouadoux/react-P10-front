@@ -1,4 +1,4 @@
-import type { User } from '@/lib/api/types'
+import type { User } from '@/types'
 
 /**
  * Name shown in the dashboard greeting ("Bonjour Alice Dupont, ...").

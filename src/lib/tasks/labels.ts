@@ -1,4 +1,4 @@
-import type { TaskStatus } from '@/lib/api/types'
+import type { TaskStatus } from '@/types'
 
 // French text shown in the status badge of each card (key = status sent by the backend)
 export const STATUS_LABELS: Record<TaskStatus, string> = {

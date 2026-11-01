@@ -1,5 +1,5 @@
-import type { Task } from '@/lib/api/types';
-import { formatDueDate } from '@/lib/taskLabels';
+import type { Task } from '@/types';
+import { formatDueDate } from '@/lib/tasks/labels';
 import Image from 'next/image';
 
 type TaskMetaProps = {

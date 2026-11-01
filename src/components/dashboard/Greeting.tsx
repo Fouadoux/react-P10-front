@@ -1,5 +1,5 @@
 import { getCurrentUser } from '@/lib/auth/currentUser'
-import { getDisplayName } from '@/lib/displayName'
+import { getDisplayName } from '@/lib/users/displayName'
 
 // "Bonjour Alice Dupont, ..." line under the dashboard title.
 // Reads the user at request time: must be rendered inside a <Suspense>.

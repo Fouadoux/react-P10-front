@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import type { Task } from '@/lib/api/types'
-import { STATUS_LABELS, STATUS_CLASSES } from '@/lib/taskLabels'
+import type { Task } from '@/types'
+import { STATUS_LABELS, STATUS_CLASSES } from '@/lib/tasks/labels'
 import TaskMeta from '@/components/tasks/TaskMeta';
 
 type KanbanCardProps = {

@@ -1,8 +1,8 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { SESSION_COOKIE } from '@/lib/auth/constants'
 
-// Pages reachable without being logged in ("/demo" is temporary)
-const PUBLIC_PATHS = ['/login', '/register', '/demo']
+// Pages reachable without being logged in
+const PUBLIC_PATHS = ['/login', '/register']
 
 // Pages that only make sense for visitors: a logged-in user is sent to the dashboard instead
 const GUEST_ONLY_PATHS = ['/login', '/register']

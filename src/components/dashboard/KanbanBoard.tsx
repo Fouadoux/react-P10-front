@@ -1,6 +1,6 @@
 import KanbanColumn from '@/components/dashboard/KanbanColumn'
-import { getAssignedTasks } from '@/lib/api/dashboard'
-import { getTasksOfMonth, groupTasksByStatus } from '@/lib/taskGroups'
+import { getAssignedTasks } from '@/lib/tasks/api'
+import { getTasksOfMonth, groupTasksByStatus } from '@/lib/tasks/groups'
 
 // Kanban view: the assigned tasks due this month, split into one column per status.
 // Must be rendered inside a <Suspense> (it reads the session cookie at request time).

@@ -1,4 +1,4 @@
-import type { Task, TaskPriority } from '@/lib/api/types'
+import type { Task, TaskPriority } from '@/types'
 
 // Rank of each priority: the smaller the number, the more urgent
 export const PRIORITY_RANK: Record<TaskPriority, number> = {

@@ -1,4 +1,4 @@
-import type { ProfileData, User } from '@/lib/api/types'
+import type { ProfileData, User } from '@/types'
 import { authFetch } from '@/lib/api/client';
 
 // Asks the backend who is logged in, using the token stored in the session cookie.

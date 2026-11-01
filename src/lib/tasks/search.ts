@@ -1,4 +1,4 @@
-import type { Task } from '@/lib/api/types'
+import type { Task } from '@/types'
 
 /**
  * Keeps the tasks whose title or description contains the searched text.

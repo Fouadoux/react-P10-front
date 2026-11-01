@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import type { DashboardView } from '@/lib/dashboardView'
+import type { DashboardView } from '@/lib/dashboard/view'
 
 type Tab = {
     view: DashboardView

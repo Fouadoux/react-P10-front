@@ -1,5 +1,5 @@
 import { authFetch } from '@/lib/api/client'
-import type { AssignedTasksData, Task } from '@/lib/api/types'
+import type { AssignedTasksData, Task } from '@/types'
 
 // Asks the backend for the tasks assigned to the logged-in user (most urgent first).
 // Returns an empty list when nobody is logged in or when the backend refuses.

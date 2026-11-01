@@ -3,8 +3,8 @@
 import { useState } from 'react'
 import TaskCard from '@/components/tasks/TaskCard'
 import TaskSearch from '@/components/tasks/TaskSearch'
-import type { Task } from '@/lib/api/types'
-import { filterTasksByQuery } from '@/lib/taskSearch'
+import type { Task } from '@/types'
+import { filterTasksByQuery } from '@/lib/tasks/search'
 
 type FilterableTasksProps = {
     // Every assigned task, already sorted by priority

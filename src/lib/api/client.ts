@@ -1,4 +1,4 @@
-import type { ApiResponse } from './types'
+import type { ApiResponse } from '@/types'
 import { getToken } from '@/lib/auth/session';
 
 // Read on the server only: no NEXT_PUBLIC_ prefix, so the browser never sees this URL

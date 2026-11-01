@@ -1,4 +1,4 @@
-import type { Task, TaskStatus } from '@/lib/api/types'
+import type { Task, TaskStatus } from '@/types'
 
 // The three Kanban columns: one list of tasks per status (cancelled tasks have no column)
 export type KanbanColumns = Record<Exclude<TaskStatus, 'CANCELLED'>, Task[]>

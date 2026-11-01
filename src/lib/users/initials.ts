@@ -1,4 +1,4 @@
-import type { User } from '@/lib/api/types'
+import type { User } from '@/types'
 
 /**
  * Builds the letters displayed in the avatar (e.g. "Alice Dupont" -> "AD").

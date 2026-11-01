@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation'
 import { apiFetch } from '@/lib/api/client'
 import { clearSession, setSession } from '@/lib/auth/session'
-import type { LoginData } from '@/lib/api/types'
+import type { LoginData } from '@/types'
 
 export type LoginState = {
     message: string | null
