@@ -1,12 +1,13 @@
-import type { User } from '@/types'
+import type { UserSummary } from '@/types'
 
 /**
  * Builds the letters displayed in the avatar (e.g. "Alice Dupont" -> "AD").
  *
- * @param user the logged-in user, or null if none
+ * @param user a user (the logged-in one, or a project member), or null if none.
+ *             Only name and email are read, so both User and UserSummary fit.
  * @returns    the initials in upper case, never an empty string
  */
-export const getInitials = (user: User | null): string => {
+export const getInitials = (user: Pick<UserSummary, 'name' | 'email'> | null): string => {
     if (!user) return '?'
 
     // trim() BEFORE the emptiness test; "?." avoids a crash when name is null
