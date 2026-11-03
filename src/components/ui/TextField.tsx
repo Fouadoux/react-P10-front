@@ -5,7 +5,7 @@
 type TextFieldProps = {
   label: string
   name: string
-  type: 'text' | 'email' | 'password'
+  type: 'text' | 'email' | 'password' | 'date'
   value: string
   onChange: (value: string) => void
   autoComplete?: 'off' | 'email' | 'current-password' | 'new-password'

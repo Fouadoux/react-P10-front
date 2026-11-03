@@ -43,6 +43,11 @@ export type ProjectData = {
 // Content of `data` for a successful POST /projects: the created project
 export type CreateProjectData = ProjectData;
 
+// Content of `data` for a successful POST /projects/:id/tasks (we only need the id of the created task)
+export type CreateTaskData = {
+    task: { id: string };
+};
+
 // A task as returned by GET /projects/:id/tasks.
 // Not the same shape as the dashboard's Task: assignees and comments carry fewer fields here.
 export type ProjectTask = {
