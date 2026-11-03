@@ -34,6 +34,11 @@ export type ProjectsData = {
     projects: Project[];
 };
 
+// Content of `data` for a successful POST /projects (the created project)
+export type CreateProjectData = {
+    project: Project;
+};
+
 // Content of `data` for a successful GET /projects/:id/tasks
 // (only the fields we read are described: the progress bar needs the status of each task)
 export type ProjectTasksData = {

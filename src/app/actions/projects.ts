@@ -1,0 +1,33 @@
+'use server'
+
+import { revalidatePath } from 'next/cache'
+import { authFetch } from '@/lib/api/client'
+import type { CreateProjectData } from '@/types'
+
+export type CreateProjectState = {
+    message: string | null
+    // true once the project is created: the form uses it to close the modal
+    success: boolean
+}
+
+// Server Action: runs on the server when the "Créer un projet" form is submitted
+export const createProjectAction = async (_previousState: CreateProjectState, formData: FormData): Promise<CreateProjectState> => {
+    const name = String(formData.get('name') ?? '')
+    const description = String(formData.get('description') ?? '')
+    const contributors = String(formData.get('contributors') ?? '').split(',')
+        .map(email => email.trim())
+        .filter(email => email !== '');
+
+    const response = await authFetch<CreateProjectData>('/projects', {
+        method: 'POST',
+        body: JSON.stringify({ name, description, contributors }),
+    })
+    if (!response.success) {
+        if (response.data) {
+            return { message: response.data.errors.map(e => e.message).join(', '), success: false }
+        }
+        return { message: response.message, success: false }
+    }
+    revalidatePath('/projects')
+    return { message: null, success: true }
+}

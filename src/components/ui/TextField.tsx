@@ -5,13 +5,14 @@
 type TextFieldProps = {
   label: string
   name: string
-  type: 'email' | 'password'
+  type: 'text' | 'email' | 'password'
   value: string
   onChange: (value: string) => void
-  autoComplete?: 'email' | 'current-password' | 'new-password'
+  autoComplete?: 'off' | 'email' | 'current-password' | 'new-password'
+  placeholder?: string
 }
 
-const TextField = ({ label, name, type, value, onChange, autoComplete }: TextFieldProps) => (
+const TextField = ({ label, name, type, value, onChange, autoComplete, placeholder }: TextFieldProps) => (
   // The input is inside the label: the browser links them on its own (no htmlFor/id needed)
   <label className="flex w-full flex-col gap-[7px] text-sm text-black">
     {label}
@@ -21,6 +22,7 @@ const TextField = ({ label, name, type, value, onChange, autoComplete }: TextFie
       value={value}
       onChange={(e) => onChange(e.target.value)}
       autoComplete={autoComplete}
+      placeholder={placeholder}
       className="h-[53px] w-full rounded-[4px] border border-neutral-grey-200 bg-neutral-white px-[17px] focus:border-brand-dark-orange focus:outline-none focus:ring-1 focus:ring-brand-dark-orange"
     />
   </label>
