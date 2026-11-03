@@ -1,12 +1,13 @@
-import type { User } from '@/types'
+import type { UserSummary } from '@/types'
 
 /**
- * Name shown in the dashboard greeting ("Bonjour Alice Dupont, ...").
+ * Name shown for a user ("Alice Dupont", or the email when there is no name).
  *
- * @param user the logged-in user, or null if the session is no longer valid
- * @returns    the text to put after "Bonjour"
+ * @param user a user (the logged-in one, or a project member), or null if the session is no longer valid.
+ *             Only name and email are read, so both User and UserSummary fit.
+ * @returns    the text to display
  */
-export const getDisplayName = (user: User | null): string => {
+export const getDisplayName = (user: Pick<UserSummary, 'name' | 'email'> | null): string => {
     if (!user) return 'Utilisateur'
     return user.name ?? user.email
 }
