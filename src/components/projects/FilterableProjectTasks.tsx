@@ -5,15 +5,17 @@ import ProjectTaskCard from '@/components/projects/ProjectTaskCard'
 import StatusFilterSelect from '@/components/projects/StatusFilterSelect'
 import TaskSearch from '@/components/tasks/TaskSearch'
 import { filterTasksByQuery, filterTasksByStatus, type StatusFilter } from '@/lib/tasks/search'
-import type { ProjectTask } from '@/types'
+import type { ProjectTask, UserSummary } from '@/types'
 
 type FilterableProjectTasksProps = {
     // Every task of the project, already sorted by priority
     tasks: ProjectTask[]
+    // The members of the project (needed by the "Modifier" modal of each task)
+    people: UserSummary[]
 }
 
 // "Tâches" panel of the project page: search box, status dropdown and the cards, filtered as the user types
-const FilterableProjectTasks = ({ tasks }: FilterableProjectTasksProps) => {
+const FilterableProjectTasks = ({ tasks, people }: FilterableProjectTasksProps) => {
     const [query, setQuery] = useState<string>('')
     const [status, setStatus] = useState<StatusFilter>('ALL')
     const visibleTasks = filterTasksByStatus(filterTasksByQuery(tasks, query), status)
@@ -39,7 +41,7 @@ const FilterableProjectTasks = ({ tasks }: FilterableProjectTasksProps) => {
                 <ul className="flex flex-col gap-4">
                     {visibleTasks.map(task => (
                         <li key={task.id}>
-                            <ProjectTaskCard task={task} />
+                            <ProjectTaskCard task={task} people={people} />
                         </li>
                     ))}
                 </ul>

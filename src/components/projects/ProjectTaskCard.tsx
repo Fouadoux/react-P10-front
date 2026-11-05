@@ -1,18 +1,25 @@
 import Image from 'next/image'
-import type { ProjectTask } from '@/types'
+import TaskMenu from '@/components/projects/TaskMenu'
+import type { ProjectTask, UserSummary } from '@/types'
 import { formatDueDate, STATUS_CLASSES, STATUS_LABELS } from '@/lib/tasks/labels'
 import { getDisplayName } from '@/lib/users/displayName'
 import { getInitials } from '@/lib/users/initials'
 
 type ProjectTaskCardProps = {
     task: ProjectTask
+    // The members of the project (needed by the edit modal of the "…" menu)
+    people: UserSummary[]
 }
 
-// A task of the project page: title and status badge, description, due date, assignees, number of comments
-const ProjectTaskCard = ({ task }: ProjectTaskCardProps) => {
+// A task of the project page: title and status badge, description, due date, assignees, number of comments,
+// and the "…" menu (edit, delete)
+const ProjectTaskCard = ({ task, people }: ProjectTaskCardProps) => {
     return (
-        <article className="flex flex-col gap-6 rounded-[10px] border border-neutral-grey-200 bg-neutral-white px-8 pt-8">
-            <div className="flex flex-col gap-4">
+        <article className="relative flex flex-col gap-6 rounded-[10px] border border-neutral-grey-200 bg-neutral-white px-8 pt-8">
+            <div className="absolute right-8 top-8">
+                <TaskMenu task={task} people={people} />
+            </div>
+            <div className="flex flex-col gap-4 pr-16">
                 <div className="flex flex-col gap-1">
                     <div className="flex flex-wrap items-center gap-3">
                         <h3 className="text-base text-neutral-grey-950">{task.title}</h3>

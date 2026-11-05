@@ -4,6 +4,7 @@ import ProjectContributors from '@/components/projects/ProjectContributors'
 import ProjectHeader from '@/components/projects/ProjectHeader'
 import ProjectTasks from '@/components/projects/ProjectTasks'
 import { getProject } from '@/lib/projects/api'
+import { getProjectPeople } from '@/lib/projects/people'
 
 type ProjectDetailsProps = {
     // The dynamic part of the URL: /projects/<projectId>
@@ -24,7 +25,7 @@ const ProjectDetails = async ({ params }: ProjectDetailsProps) => {
             <ProjectHeader project={project} />
             <ProjectContributors project={project} />
             <Suspense fallback={<p role="status" className="text-neutral-grey-800">Chargement des tâches…</p>}>
-                <ProjectTasks projectId={project.id} />
+                <ProjectTasks projectId={project.id} people={getProjectPeople(project)} />
             </Suspense>
         </div>
     )
