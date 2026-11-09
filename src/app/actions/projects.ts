@@ -51,3 +51,38 @@ export const updateProjectAction = async (_previousState: CreateProjectState, fo
     revalidatePath('/projects')
     return { message: null, success: true }
 }
+
+export const addContributorAction = async (_previousState: CreateProjectState, formData: FormData): Promise<CreateProjectState> => {
+    const email = String(formData.get('email') ?? '').trim()
+    const projectId = String(formData.get('projectId') ?? '')
+
+    const response = await authFetch<null>(`/projects/${projectId}/contributors`, {
+        method: 'POST',
+        body: JSON.stringify({ email }),
+    })
+    if (!response.success) {
+        if (response.data) {
+            return { message: response.data.errors.map(e => e.message).join(', '), success: false }
+        }
+        return { message: response.message, success: false }
+    }
+    revalidatePath(`/projects/${projectId}`)
+    return { message: null, success: true }
+}
+
+export const removeContributorAction = async (_previousState: CreateProjectState, formData: FormData): Promise<CreateProjectState> => {
+    const userId = String(formData.get('userId') ?? '')
+    const projectId = String(formData.get('projectId') ?? '')
+
+    const response = await authFetch<null>(`/projects/${projectId}/contributors/${userId}`, {
+        method: 'DELETE',
+    })
+    if (!response.success) {
+        if (response.data) {
+            return { message: response.data.errors.map(e => e.message).join(', '), success: false }
+        }
+        return { message: response.message, success: false }
+    }
+    revalidatePath(`/projects/${projectId}`)
+    return { message: null, success: true }
+}
