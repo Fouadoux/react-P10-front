@@ -26,3 +26,7 @@ export const formatDueDate = (dueDate: string | null): string => {
     if (!dueDate) return 'Inconnue'
     return new Date(dueDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })
 }
+
+// The date shown on a comment, with the year: "5 novembre 2026"
+export const formatCommentDate = (createdAt: string): string =>
+    new Date(createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })

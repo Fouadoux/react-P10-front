@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import TaskComments from '@/components/projects/TaskComments'
 import TaskMenu from '@/components/projects/TaskMenu'
 import type { ProjectTask, UserSummary } from '@/types'
 import { formatDueDate, STATUS_CLASSES, STATUS_LABELS } from '@/lib/tasks/labels'
@@ -57,9 +58,7 @@ const ProjectTaskCard = ({ task, people }: ProjectTaskCardProps) => {
                 </div>
             </div>
 
-            <p className="border-t border-neutral-grey-200 py-4 text-xs text-neutral-grey-950">
-                Commentaires ({task.comments.length})
-            </p>
+            <TaskComments projectId={task.projectId} taskId={task.id} comments={task.comments} />
         </article>
     )
 }
