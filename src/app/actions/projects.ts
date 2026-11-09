@@ -31,3 +31,23 @@ export const createProjectAction = async (_previousState: CreateProjectState, fo
     revalidatePath('/projects')
     return { message: null, success: true }
 }
+
+export const updateProjectAction = async (_previousState: CreateProjectState, formData: FormData): Promise<CreateProjectState> => {
+    const name = String(formData.get('name') ?? '')
+    const description = String(formData.get('description') ?? '')
+    const projectId = String(formData.get('projectId') ?? '')
+
+    const response = await authFetch<CreateProjectData>(`/projects/${projectId}`, {
+        method: 'PUT',
+        body: JSON.stringify({ name, description }),
+    })
+    if (!response.success) {
+        if (response.data) {
+            return { message: response.data.errors.map(e => e.message).join(', '), success: false }
+        }
+        return { message: response.message, success: false }
+    }
+    revalidatePath(`/projects/${projectId}`)
+    revalidatePath('/projects')
+    return { message: null, success: true }
+}

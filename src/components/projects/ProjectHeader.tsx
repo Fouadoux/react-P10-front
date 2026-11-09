@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import CreateTaskModal from '@/components/projects/CreateTaskModal'
+import EditProjectModal from '@/components/projects/EditProjectModal'
 import type { Project } from '@/types'
 
 type ProjectHeaderProps = {
@@ -24,7 +25,10 @@ const ProjectHeader = ({ project }: ProjectHeaderProps) => (
                 {project.description && <p className="text-base text-neutral-grey-800">{project.description}</p>}
             </div>
         </div>
-        <CreateTaskModal project={project} />
+        <div className="flex flex-wrap items-center gap-4">
+            {project.userRole === 'ADMIN' && <EditProjectModal project={project} />}
+            <CreateTaskModal project={project} />
+        </div>
     </header>
 )
 
