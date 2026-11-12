@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import CreateTaskModal from '@/components/projects/CreateTaskModal'
+import DeleteProjectButton from '@/components/projects/DeleteProjectButton'
 import EditProjectModal from '@/components/projects/EditProjectModal'
 import type { Project } from '@/types'
 
@@ -8,7 +9,7 @@ type ProjectHeaderProps = {
 }
 
 // Top of the project page: back button, name and description
-const ProjectHeader = ({ project }: ProjectHeaderProps) => (
+const ProjectHeader = ({project}: ProjectHeaderProps) => (
     <header className="flex flex-wrap items-start justify-between gap-6">
         <div className="flex items-start gap-4">
             <Link
@@ -16,8 +17,9 @@ const ProjectHeader = ({ project }: ProjectHeaderProps) => (
                 aria-label="Retour aux projets"
                 className="flex size-14 shrink-0 items-center justify-center rounded-[10px] border border-neutral-grey-200 bg-neutral-white text-neutral-grey-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-dark-orange"
             >
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M14 8H2M7 3L2 8l5 5" />
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"
+                     strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M14 8H2M7 3L2 8l5 5"/>
                 </svg>
             </Link>
             <div className="flex flex-col gap-3">
@@ -26,8 +28,9 @@ const ProjectHeader = ({ project }: ProjectHeaderProps) => (
             </div>
         </div>
         <div className="flex flex-wrap items-center gap-4">
-            {project.userRole === 'ADMIN' && <EditProjectModal project={project} />}
-            <CreateTaskModal project={project} />
+            {project.userRole === 'ADMIN' && <EditProjectModal project={project}/>}
+            <CreateTaskModal project={project}/>
+            {project.userRole === 'ADMIN' && <DeleteProjectButton project={project}/>}
         </div>
     </header>
 )

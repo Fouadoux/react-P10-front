@@ -1,6 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 import { authFetch } from '@/lib/api/client'
 import type { CreateProjectData } from '@/types'
 
@@ -85,4 +86,24 @@ export const removeContributorAction = async (_previousState: CreateProjectState
     }
     revalidatePath(`/projects/${projectId}`)
     return { message: null, success: true }
+}
+
+// Server Action: runs when the deletion of a project is confirmed
+export const deleteProjectAction = async (_previousState: CreateProjectState, formData: FormData): Promise<CreateProjectState> => {
+    const projectId = String(formData.get('projectId') ?? '')
+
+    const response = await authFetch<CreateProjectData>(`/projects/${projectId}`,
+        {
+            method: 'DELETE',
+        })
+
+    if (!response.success) {
+        if (response.data) {
+            return { message: response.data.errors.map(e => e.message).join(', '), success: false }
+        }
+        return { message: response.message, success: false }
+    }
+
+    revalidatePath(`/projects`)
+    redirect(`/projects`)
 }
