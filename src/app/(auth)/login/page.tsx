@@ -8,8 +8,8 @@ export const metadata = { title: 'Connexion - Abricot' }
 // Server component: static layout, only <LoginForm/> runs in the browser
 export default function LoginPage() {
     return (
-        <main className="flex min-h-screen">
-            <section className="flex w-full shrink-0 flex-col items-center justify-between bg-neutral-grey-50 px-6 py-[55px] lg:w-140.5 lg:px-[140px]">
+        <main className="relative flex min-h-screen">
+            <section className="relative z-10 flex w-full shrink-0 flex-col items-center justify-between bg-neutral-grey-50 px-6 py-[55px] lg:w-140.5 lg:px-[140px]">
                 <Logo />
                 <div className="flex w-full flex-col items-center gap-7.5">
                     <h1 className="text-center font-heading text-[40px] font-bold text-brand-dark-orange">Connexion</h1>
@@ -21,8 +21,9 @@ export default function LoginPage() {
                     <TextLink label="Créer un compte" href="/register" />
                 </p>
             </section>
-            <div className="relative hidden min-w-0 flex-1 lg:block">
-                <Image src="/images/login-cover.jpg" alt="" fill sizes="60vw" className="object-cover" priority />
+            {/* The photo is the background of the whole page; the form section above covers its left part */}
+            <div className="absolute inset-0 hidden lg:block">
+                <Image src="/images/login-cover.png" alt="" fill sizes="100vw" className="object-cover" priority />
             </div>
         </main>
     )

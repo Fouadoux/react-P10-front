@@ -9,7 +9,7 @@ type TaskMetaProps = {
 const TaskMeta = ({task}: TaskMetaProps) => {
     return (
 
-        <p className="flex flex-wrap items-center gap-3 text-xs text-neutral-grey-800">
+        <p className="flex flex-wrap items-center gap-3 text-xs text-neutral-grey-500">
                 <span className="flex items-center gap-2">
                     <Image src="/icons/icon-folder-grey.svg" alt="Projet" width={18} height={14}/>
                     {task.project.name}

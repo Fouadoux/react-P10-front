@@ -14,7 +14,7 @@ const TaskCard = ({task}: TaskCardProps) => (
         <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
                 <h3 className="text-base font-medium text-neutral-grey-950">{task.title}</h3>
-                {task.description && <p className="text-sm text-neutral-grey-800">{task.description}</p>}
+                {task.description && <p className="text-sm text-neutral-grey-500">{task.description}</p>}
             </div>
             <TaskMeta task={task}/>
         </div>

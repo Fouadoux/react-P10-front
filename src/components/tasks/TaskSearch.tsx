@@ -19,7 +19,7 @@ const TaskSearch = ({ value, onChange }: TaskSearchProps) => (
             value={value}
             onChange={event => onChange(event.target.value)}
             placeholder="Rechercher une tâche"
-            className="w-full bg-transparent text-sm text-neutral-grey-950 placeholder:text-neutral-grey-800 focus-visible:outline-none"
+            className="w-full bg-transparent text-sm text-neutral-grey-950 placeholder:text-neutral-grey-500 focus-visible:outline-none"
         />
         <Image src="/icons/icon-search-grey.svg" alt="" width={14} height={14} />
     </div>

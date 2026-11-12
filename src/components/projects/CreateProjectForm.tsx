@@ -4,6 +4,7 @@ import { useActionState, useEffect, useState } from 'react'
 import { createProjectAction, type CreateProjectState } from '@/app/actions/projects'
 import Button from '@/components/ui/Button'
 import TextField from '@/components/ui/TextField'
+import { isBlank } from '@/lib/forms/isBlank'
 
 const initialState: CreateProjectState = { message: null, success: false }
 
@@ -19,6 +20,8 @@ const CreateProjectForm = ({ onSuccess }: CreateProjectFormProps) => {
     const [name, setName] = useState<string>('')
     const [description, setDescription] = useState<string>('')
     const [contributors, setContributors] = useState<string>('')
+    // The fields marked with * must be filled: computed from the typed values, no state of its own
+    const canSubmit = !isBlank(name) && !isBlank(description)
 
     // Tell the modal to close when the Server Action reports a success
     useEffect(() => {
@@ -38,7 +41,7 @@ const CreateProjectForm = ({ onSuccess }: CreateProjectFormProps) => {
                 onChange={setContributors}
             />
             {state.message && <p role="alert" className="text-red-500">{state.message}</p>}
-            <Button label="Ajouter un projet" type="submit" disabled={isPending} />
+            <Button label="Ajouter un projet" type="submit" disabled={isPending || !canSubmit} />
         </form>
     )
 }

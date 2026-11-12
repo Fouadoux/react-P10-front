@@ -32,7 +32,7 @@ const TaskMenu = ({ task, people }: TaskMenuProps) => {
                 aria-expanded={isMenuOpen}
                 aria-label={`Actions pour la tâche ${task.title}`}
                 onClick={() => setIsMenuOpen(previous => !previous)}
-                className="flex size-[46px] cursor-pointer items-center justify-center rounded-[10px] border border-neutral-grey-200 bg-neutral-white text-neutral-grey-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-dark-orange"
+                className="flex size-14 cursor-pointer items-center justify-center rounded-[10px] border border-neutral-grey-200 bg-neutral-white text-neutral-grey-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-dark-orange"
             >
                 <svg width="16" height="4" viewBox="0 0 16 4" fill="currentColor" aria-hidden="true">
                     <circle cx="2" cy="2" r="1.5" />

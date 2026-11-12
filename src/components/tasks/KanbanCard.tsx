@@ -16,7 +16,7 @@ const KanbanCard = ({task}: KanbanCardProps) => (
                 {STATUS_LABELS[task.status]}
             </span>
         </div>
-        {task.description && <p className="text-sm text-neutral-grey-800">{task.description}</p>}
+        {task.description && <p className="text-sm text-neutral-grey-500">{task.description}</p>}
         <TaskMeta task={task}/>
         <Link
             href={`/projects/${task.projectId}`}

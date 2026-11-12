@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import ProjectTaskCard from '@/components/projects/ProjectTaskCard'
+import ProjectViewChips from '@/components/projects/ProjectViewChips'
 import StatusFilterSelect from '@/components/projects/StatusFilterSelect'
 import TaskSearch from '@/components/tasks/TaskSearch'
 import { filterTasksByQuery, filterTasksByStatus, type StatusFilter } from '@/lib/tasks/search'
@@ -26,11 +27,18 @@ const FilterableProjectTasks = ({ tasks, people }: FilterableProjectTasksProps) 
             <div className="flex flex-wrap items-center justify-between gap-4">
                 <div className="flex flex-col gap-1">
                     <h2 className="text-xl text-neutral-grey-950">Tâches</h2>
-                    <p className="text-base text-neutral-grey-800">Par ordre de priorité</p>
+                    <p className="text-base text-neutral-grey-500">Par ordre de priorité</p>
                 </div>
                 <div className="flex flex-wrap items-center gap-4">
-                    <StatusFilterSelect value={status} onChange={setStatus} />
-                    <TaskSearch value={query} onChange={setQuery} />
+                    <ProjectViewChips />
+                    {/* Fixed widths from the mockup (152 and 283 px). Without them the group is measured too narrow
+                        and the search box drops to a second line. */}
+                    <div className="w-[152px]">
+                        <StatusFilterSelect value={status} onChange={setStatus} />
+                    </div>
+                    <div className="w-[283px] max-w-full">
+                        <TaskSearch value={query} onChange={setQuery} />
+                    </div>
                 </div>
             </div>
             {visibleTasks.length === 0 ? (
@@ -38,7 +46,7 @@ const FilterableProjectTasks = ({ tasks, people }: FilterableProjectTasksProps) 
                     {isFiltering ? 'Aucune tâche ne correspond à votre recherche.' : 'Ce projet n’a pas encore de tâche.'}
                 </p>
             ) : (
-                <ul className="flex flex-col gap-4">
+                <ul className="flex flex-col gap-4 md:px-10">
                     {visibleTasks.map(task => (
                         <li key={task.id}>
                             <ProjectTaskCard task={task} people={people} />

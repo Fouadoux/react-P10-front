@@ -21,7 +21,7 @@ const FilterableTasks = ({ tasks }: FilterableTasksProps) => {
             <div className="flex flex-wrap items-center justify-between gap-4">
                 <div className="flex flex-col gap-1">
                     <h2 className="text-xl text-neutral-grey-950">Mes tâches assignées</h2>
-                    <p className="text-base text-neutral-grey-800">Par ordre de priorité</p>
+                    <p className="text-base text-neutral-grey-500">Par ordre de priorité</p>
                 </div>
                 <TaskSearch value={query} onChange={setQuery} />
             </div>

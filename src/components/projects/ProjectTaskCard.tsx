@@ -28,16 +28,16 @@ const ProjectTaskCard = ({ task, people }: ProjectTaskCardProps) => {
                             {STATUS_LABELS[task.status]}
                         </span>
                     </div>
-                    {task.description && <p className="text-sm text-neutral-grey-800">{task.description}</p>}
+                    {task.description && <p className="text-sm text-neutral-grey-500">{task.description}</p>}
                 </div>
 
-                <p className="flex items-center gap-2 text-xs text-neutral-grey-800">
+                <p className="flex items-center gap-2 text-xs text-neutral-grey-500">
                     Échéance :
                     <Image src="/icons/icon-calendar-grey.svg" alt="" width={15} height={17} />
                     <span className="text-neutral-grey-950">{formatDueDate(task.dueDate)}</span>
                 </p>
 
-                <div className="flex flex-wrap items-center gap-3 text-xs text-neutral-grey-800">
+                <div className="flex flex-wrap items-center gap-3 text-xs text-neutral-grey-500">
                     <span>Assigné à :</span>
                     {task.assignees.length === 0 ? (
                         <span>personne</span>
@@ -48,7 +48,7 @@ const ProjectTaskCard = ({ task, people }: ProjectTaskCardProps) => {
                                     <span className="flex size-[22px] items-center justify-center rounded-full bg-neutral-grey-200 text-[9px] text-neutral-grey-800">
                                         {getInitials(assignee.user)}
                                     </span>
-                                    <span className="rounded-full bg-neutral-grey-200 px-3 py-1 text-neutral-grey-800">
+                                    <span className="rounded-full bg-neutral-grey-200 px-3 py-1 text-neutral-grey-500">
                                         {getDisplayName(assignee.user)}
                                     </span>
                                 </li>

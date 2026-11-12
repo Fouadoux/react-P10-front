@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import CreateTaskModal from '@/components/projects/CreateTaskModal'
-import DeleteProjectButton from '@/components/projects/DeleteProjectButton'
+import AiTasksButton from '@/components/projects/AiTasksButton'
 import EditProjectModal from '@/components/projects/EditProjectModal'
 import type { Project } from '@/types'
 
@@ -23,14 +23,16 @@ const ProjectHeader = ({project}: ProjectHeaderProps) => (
                 </svg>
             </Link>
             <div className="flex flex-col gap-3">
-                <h1 className="font-heading text-2xl font-semibold text-neutral-grey-950">{project.name}</h1>
-                {project.description && <p className="text-base text-neutral-grey-800">{project.description}</p>}
+                <div className="flex flex-wrap items-baseline gap-4">
+                    <h1 className="font-heading text-2xl font-semibold text-neutral-grey-950">{project.name}</h1>
+                    {project.userRole === 'ADMIN' && <EditProjectModal project={project}/>}
+                </div>
+                {project.description && <p className="text-base text-neutral-grey-500">{project.description}</p>}
             </div>
         </div>
         <div className="flex flex-wrap items-center gap-4">
-            {project.userRole === 'ADMIN' && <EditProjectModal project={project}/>}
             <CreateTaskModal project={project}/>
-            {project.userRole === 'ADMIN' && <DeleteProjectButton project={project}/>}
+            <AiTasksButton />
         </div>
     </header>
 )

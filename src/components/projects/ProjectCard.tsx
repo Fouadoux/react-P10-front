@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import type { Project } from '@/types'
 import { getInitials } from '@/lib/users/initials'
@@ -25,13 +26,13 @@ const ProjectCard = ({ project, progress }: ProjectCardProps) => {
                         {project.name}
                     </Link>
                 </h3>
-                {project.description && <p className="line-clamp-2 text-xs leading-[17px] text-neutral-grey-800">{project.description}</p>}
+                {project.description && <p className="line-clamp-2 text-xs leading-[17px] text-neutral-grey-500">{project.description}</p>}
             </div>
 
             <div className="flex flex-col gap-4">
-                <div className="flex items-center justify-between text-xs leading-[15px] text-neutral-grey-800">
+                <div className="flex items-center justify-between text-xs leading-[15px] text-neutral-grey-500">
                     <span>Progression</span>
-                    <span>{progress.percent}%</span>
+                    <span className="text-neutral-grey-950">{progress.percent}%</span>
                 </div>
                 <div className="flex flex-col gap-2">
                     <div
@@ -44,14 +45,17 @@ const ProjectCard = ({ project, progress }: ProjectCardProps) => {
                     >
                         <div className="h-full rounded-full bg-brand-dark-orange" style={{ width: `${progress.percent}%` }} />
                     </div>
-                    <p className="text-[10px] leading-3 text-neutral-grey-800">
+                    <p className="text-[10px] leading-3 text-neutral-grey-500">
                         {progress.done}/{progress.total} tâches terminées
                     </p>
                 </div>
             </div>
 
             <div className="flex flex-col gap-[15px]">
-                <p className="text-[10px] leading-3 text-neutral-grey-800">Équipe ({otherMembers.length + 1})</p>
+                <p className="flex items-center gap-1.5 text-[10px] leading-3 text-neutral-grey-500">
+                    <Image src="/icons/icon-team-grey.svg" alt="" width={12} height={11} />
+                    Équipe ({otherMembers.length + 1})
+                </p>
                 <ul className="flex flex-wrap items-center gap-1">
                     <li className="flex items-center gap-[5px]">
                         <span className="flex size-[27px] items-center justify-center rounded-full bg-brand-light-orange text-[10px] text-neutral-grey-950">

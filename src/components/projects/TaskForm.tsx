@@ -4,6 +4,7 @@ import { useActionState, useEffect, useState } from 'react'
 import type { TaskFormState } from '@/app/actions/tasks'
 import Button from '@/components/ui/Button'
 import TextField from '@/components/ui/TextField'
+import { isBlank } from '@/lib/forms/isBlank'
 import { STATUS_CLASSES, STATUS_LABELS } from '@/lib/tasks/labels'
 import { getDisplayName } from '@/lib/users/displayName'
 import type { TaskStatus, UserSummary } from '@/types'
@@ -46,6 +47,8 @@ const TaskForm = ({ action, projectId, taskId, people, initialValues = EMPTY_VAL
     const [title, setTitle] = useState<string>(initialValues.title)
     const [description, setDescription] = useState<string>(initialValues.description)
     const [dueDate, setDueDate] = useState<string>(initialValues.dueDate)
+    // The fields marked with * must be filled. When editing, the fields start filled, so the button starts enabled.
+    const canSubmit = !isBlank(title) && !isBlank(description) && !isBlank(dueDate)
 
     // Tell the modal to close when the Server Action reports a success
     useEffect(() => {
@@ -93,7 +96,7 @@ const TaskForm = ({ action, projectId, taskId, people, initialValues = EMPTY_VAL
             </fieldset>
 
             {state.message && <p role="alert" className="text-red-500">{state.message}</p>}
-            <Button label={submitLabel} type="submit" disabled={isPending} />
+            <Button label={submitLabel} type="submit" disabled={isPending || !canSubmit} />
         </form>
     )
 }
