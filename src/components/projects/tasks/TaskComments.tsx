@@ -1,4 +1,4 @@
-import CommentForm from '@/components/projects/CommentForm'
+import CommentForm from '@/components/projects/tasks/CommentForm'
 import { formatCommentDate } from '@/lib/tasks/labels'
 import { getDisplayName } from '@/lib/users/displayName'
 import { getInitials } from '@/lib/users/initials'

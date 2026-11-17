@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import ProjectTaskCard from '@/components/projects/ProjectTaskCard'
-import ProjectViewChips from '@/components/projects/ProjectViewChips'
-import StatusFilterSelect from '@/components/projects/StatusFilterSelect'
+import ProjectTaskCard from '@/components/projects/tasks/ProjectTaskCard'
+import ProjectViewChips from '@/components/projects/tasks/ProjectViewChips'
+import StatusFilterSelect from '@/components/projects/tasks/StatusFilterSelect'
 import TaskSearch from '@/components/tasks/TaskSearch'
 import { filterTasksByQuery, filterTasksByStatus, type StatusFilter } from '@/lib/tasks/search'
 import type { ProjectTask, UserSummary } from '@/types'

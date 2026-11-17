@@ -1,4 +1,4 @@
-import FilterableProjectTasks from '@/components/projects/FilterableProjectTasks'
+import FilterableProjectTasks from '@/components/projects/tasks/FilterableProjectTasks'
 import { getProjectTasks } from '@/lib/projects/api'
 import { sortByPriority } from '@/lib/tasks/sort'
 import type { UserSummary } from '@/types'

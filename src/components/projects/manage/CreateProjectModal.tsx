@@ -1,6 +1,6 @@
 'use client'
 
-import CreateProjectForm from '@/components/projects/CreateProjectForm'
+import CreateProjectForm from '@/components/projects/manage/CreateProjectForm'
 import Modal from '@/components/ui/Modal'
 
 // "+ Créer un projet" button and the modal it opens (used on the dashboard and on the projects page).

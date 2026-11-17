@@ -1,7 +1,7 @@
 'use client'
 
-import AddContributorForm from '@/components/projects/AddContributorForm'
-import RemoveContributorForm from '@/components/projects/RemoveContributorForm'
+import AddContributorForm from '@/components/projects/contributors/AddContributorForm'
+import RemoveContributorForm from '@/components/projects/contributors/RemoveContributorForm'
 import { getDisplayName } from '@/lib/users/displayName'
 import type { Project } from '@/types'
 

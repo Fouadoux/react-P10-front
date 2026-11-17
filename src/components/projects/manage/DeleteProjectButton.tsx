@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import DeleteProjectModal from '@/components/projects/DeleteProjectModal'
+import DeleteProjectModal from '@/components/projects/manage/DeleteProjectModal'
 import type { Project } from '@/types'
 
 type DeleteProjectButtonProps = {

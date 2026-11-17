@@ -1,7 +1,7 @@
 'use client'
 
 import { updateTaskAction } from '@/app/actions/tasks'
-import TaskForm, { type TaskFormValues } from '@/components/projects/TaskForm'
+import TaskForm, { type TaskFormValues } from '@/components/projects/tasks/TaskForm'
 import ModalDialog from '@/components/ui/ModalDialog'
 import type { ProjectTask, UserSummary } from '@/types'
 

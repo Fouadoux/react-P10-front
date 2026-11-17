@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import DashboardContent from '@/components/dashboard/DashboardContent'
 import Greeting from '@/components/dashboard/Greeting'
-import CreateProjectModal from '@/components/projects/CreateProjectModal'
+import CreateProjectModal from '@/components/projects/manage/CreateProjectModal'
 
 type DashboardPageProps = {
     searchParams: Promise<{ view?: string }>

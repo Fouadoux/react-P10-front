@@ -1,8 +1,8 @@
 'use client'
 
 import { useCallback, useState } from 'react'
-import DeleteTaskModal from '@/components/projects/DeleteTaskModal'
-import EditTaskModal from '@/components/projects/EditTaskModal'
+import DeleteTaskModal from '@/components/projects/tasks/DeleteTaskModal'
+import EditTaskModal from '@/components/projects/tasks/EditTaskModal'
 import type { ProjectTask, UserSummary } from '@/types'
 
 type TaskMenuProps = {
