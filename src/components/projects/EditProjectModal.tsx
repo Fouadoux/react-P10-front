@@ -1,7 +1,6 @@
 'use client'
 
 import ContributorsEditor from '@/components/projects/ContributorsEditor'
-import DeleteProjectButton from '@/components/projects/DeleteProjectButton'
 import EditProjectForm from '@/components/projects/EditProjectForm'
 import Modal from '@/components/ui/Modal'
 import type { Project } from '@/types'
@@ -21,10 +20,6 @@ const EditProjectModal = ({ project }: EditProjectModalProps) => (
             <div className="flex w-full flex-col gap-6">
                 <EditProjectForm project={project} onSuccess={close} />
                 <ContributorsEditor project={project} />
-                {/* Deleting the whole project lives here: it is not in the mockup's header */}
-                <div className="border-t border-neutral-grey-200 pt-6">
-                    <DeleteProjectButton project={project} />
-                </div>
             </div>
         )}
     </Modal>

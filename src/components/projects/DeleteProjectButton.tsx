@@ -18,9 +18,11 @@ const DeleteProjectButton = ({ project }: DeleteProjectButtonProps) => {
             <button
                 type="button"
                 onClick={() => setIsOpen(true)}
-                className="cursor-pointer rounded-[6px] border border-red-700 bg-neutral-white px-6 py-3.5 text-base text-red-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-dark-orange"
+                // Starts with the visible word (WCAG 2.5.3) and says what is deleted: several "Supprimer" can coexist on the page
+                aria-label="Supprimer le projet"
+                className="cursor-pointer text-sm text-red-700 underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-dark-orange"
             >
-                Supprimer le projet
+                Supprimer
             </button>
             <DeleteProjectModal project={project} isOpen={isOpen} onClose={() => setIsOpen(false)} />
         </>

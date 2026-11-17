@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import CreateTaskModal from '@/components/projects/CreateTaskModal'
 import AiTasksButton from '@/components/projects/AiTasksButton'
+import DeleteProjectButton from '@/components/projects/DeleteProjectButton'
 import EditProjectModal from '@/components/projects/EditProjectModal'
 import type { Project } from '@/types'
 
@@ -25,14 +26,20 @@ const ProjectHeader = ({project}: ProjectHeaderProps) => (
             <div className="flex flex-col gap-3">
                 <div className="flex flex-wrap items-baseline gap-4">
                     <h1 className="font-heading text-2xl font-semibold text-neutral-grey-950">{project.name}</h1>
-                    {project.userRole === 'ADMIN' && <EditProjectModal project={project}/>}
+                    {project.userRole === 'ADMIN' &&
+                        (
+                            <>
+                                <EditProjectModal project={project}/>
+                                <DeleteProjectButton project={project}/>
+                            </>
+                        )}
                 </div>
                 {project.description && <p className="text-base text-neutral-grey-500">{project.description}</p>}
             </div>
         </div>
         <div className="flex flex-wrap items-center gap-4">
             <CreateTaskModal project={project}/>
-            <AiTasksButton />
+            <AiTasksButton/>
         </div>
     </header>
 )
