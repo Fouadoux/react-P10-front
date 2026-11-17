@@ -8,7 +8,7 @@ type TextFieldProps = {
   type: 'text' | 'email' | 'password' | 'date'
   value: string
   onChange: (value: string) => void
-  autoComplete?: 'off' | 'email' | 'current-password' | 'new-password'
+  autoComplete?: 'off' | 'email' | 'current-password' | 'new-password' | 'given-name' | 'family-name'
   placeholder?: string
 }
 

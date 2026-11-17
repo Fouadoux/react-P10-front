@@ -1,11 +1,16 @@
 'use client'
 
 import { useState } from 'react'
+import AiTasksPanel from '@/components/projects/AiTasksPanel'
 import ModalDialog from '@/components/ui/ModalDialog'
 
+type AiTasksButtonProps = {
+    projectId: string
+}
+
 // "IA" button of the project page (orange, with a sparkle) and the modal it opens.
-// The generation itself is not built yet: the modal only says so, instead of a button that does nothing.
-const AiTasksButton = () => {
+// 'use client' because it holds a state (is the modal open?) and reacts to a click.
+const AiTasksButton = ({ projectId }: AiTasksButtonProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
     return (
@@ -21,7 +26,7 @@ const AiTasksButton = () => {
                 IA
             </button>
             <ModalDialog isOpen={isOpen} onClose={() => setIsOpen(false)} title="Générer des tâches avec l'IA">
-                <p className="text-base text-neutral-grey-950">Cette fonctionnalité sera bientôt disponible.</p>
+                <AiTasksPanel projectId={projectId} onClose={() => setIsOpen(false)} />
             </ModalDialog>
         </>
     )
