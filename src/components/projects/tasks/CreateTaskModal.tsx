@@ -1,7 +1,7 @@
 'use client'
 
 import { createTaskAction } from '@/app/actions/tasks'
-import TaskForm from '@/components/projects/TaskForm'
+import TaskForm from '@/components/projects/tasks/TaskForm'
 import Modal from '@/components/ui/Modal'
 import { getProjectPeople } from '@/lib/projects/people'
 import type { Project } from '@/types'

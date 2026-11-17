@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import CreateProjectModal from '@/components/projects/CreateProjectModal'
+import CreateProjectModal from '@/components/projects/manage/CreateProjectModal'
 import ProjectsList from '@/components/projects/ProjectsList'
 
 export const metadata = { title: 'Projets - Abricot' }

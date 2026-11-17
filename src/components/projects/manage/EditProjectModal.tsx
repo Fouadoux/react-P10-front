@@ -1,7 +1,7 @@
 'use client'
 
-import ContributorsEditor from '@/components/projects/ContributorsEditor'
-import EditProjectForm from '@/components/projects/EditProjectForm'
+import ContributorsEditor from '@/components/projects/contributors/ContributorsEditor'
+import EditProjectForm from '@/components/projects/manage/EditProjectForm'
 import Modal from '@/components/ui/Modal'
 import type { Project } from '@/types'
 

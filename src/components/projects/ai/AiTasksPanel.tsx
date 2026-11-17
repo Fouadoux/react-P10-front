@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect, useState } from 'react'
 import { addGeneratedTasksAction, generateTasksAction, type AddTasksState, type GenerateTasksState } from '@/app/actions/ai'
-import AiTaskCard from '@/components/projects/AiTaskCard'
+import AiTaskCard from '@/components/projects/ai/AiTaskCard'
 import Button from '@/components/ui/Button'
 import type { DraftTask, GeneratedTask } from '@/lib/ai/schema'
 import { isBlank } from '@/lib/forms/isBlank'

@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import TaskComments from '@/components/projects/TaskComments'
-import TaskMenu from '@/components/projects/TaskMenu'
+import TaskComments from '@/components/projects/tasks/TaskComments'
+import TaskMenu from '@/components/projects/tasks/TaskMenu'
 import type { ProjectTask, UserSummary } from '@/types'
 import { formatDueDate, STATUS_CLASSES, STATUS_LABELS } from '@/lib/tasks/labels'
 import { getDisplayName } from '@/lib/users/displayName'

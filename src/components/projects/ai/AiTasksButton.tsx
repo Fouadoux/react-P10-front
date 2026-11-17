@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import AiTasksPanel from '@/components/projects/AiTasksPanel'
+import AiTasksPanel from '@/components/projects/ai/AiTasksPanel'
 import ModalDialog from '@/components/ui/ModalDialog'
 
 type AiTasksButtonProps = {

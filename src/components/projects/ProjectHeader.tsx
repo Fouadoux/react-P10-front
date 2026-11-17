@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import CreateTaskModal from '@/components/projects/CreateTaskModal'
-import AiTasksButton from '@/components/projects/AiTasksButton'
-import DeleteProjectButton from '@/components/projects/DeleteProjectButton'
-import EditProjectModal from '@/components/projects/EditProjectModal'
+import CreateTaskModal from '@/components/projects/tasks/CreateTaskModal'
+import AiTasksButton from '@/components/projects/ai/AiTasksButton'
+import DeleteProjectButton from '@/components/projects/manage/DeleteProjectButton'
+import EditProjectModal from '@/components/projects/manage/EditProjectModal'
 import type { Project } from '@/types'
 
 type ProjectHeaderProps = {
