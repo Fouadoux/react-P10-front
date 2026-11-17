@@ -39,7 +39,7 @@ const ProjectHeader = ({project}: ProjectHeaderProps) => (
         </div>
         <div className="flex flex-wrap items-center gap-4">
             <CreateTaskModal project={project}/>
-            <AiTasksButton/>
+            <AiTasksButton projectId={project.id}/>
         </div>
     </header>
 )
