@@ -43,6 +43,8 @@ type MenuProps = {
 
 const Menu = ({ initials }: MenuProps) => {
     const [open, setOpen] = useState<boolean>(false)
+    // On "Mon compte" the avatar is filled in orange, like in the mockup
+    const isAccountPage = usePathname() === '/account'
 
     return (
         <header className="flex h-[94px] items-center justify-between bg-neutral-white px-[100px] py-2 shadow-[0px_4px_12px_1px_rgba(0,0,0,0.02)]">
@@ -67,13 +69,22 @@ const Menu = ({ initials }: MenuProps) => {
                     type="button"
                     aria-haspopup="menu"
                     aria-expanded={open}
+                    aria-label="Menu du compte"
                     onClick={() => setOpen(prev => !prev)}
-                    className="flex size-16.25 cursor-pointer items-center justify-center rounded-full bg-brand-light-orange text-sm uppercase tracking-[0.28px] text-neutral-grey-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-dark-orange"
+                    className={`flex size-16.25 cursor-pointer items-center justify-center rounded-full text-sm uppercase tracking-[0.28px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-dark-orange ${isAccountPage ? 'bg-brand-dark-orange text-neutral-white' : 'bg-brand-light-orange text-neutral-grey-950'}`}
                 >
                     {initials}
                 </button>
                 {open && (
                     <div role="menu" className="absolute right-0 top-full z-10 mt-2 w-48 rounded-[10px] border border-neutral-grey-200 bg-neutral-white py-2 shadow-[0px_4px_12px_1px_rgba(0,0,0,0.08)]">
+                        <Link
+                            href="/account"
+                            role="menuitem"
+                            onClick={() => setOpen(false)}
+                            className="block w-full px-4 py-2 text-left text-base text-neutral-grey-950 hover:bg-neutral-grey-50 focus-visible:bg-neutral-grey-50 focus-visible:outline-none"
+                        >
+                            Mon compte
+                        </Link>
                         {/* A form calling a Server Action: works even before the page is hydrated */}
                         <form action={logoutAction}>
                             <button
