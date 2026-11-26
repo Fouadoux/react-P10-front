@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import ProjectContributors from '@/components/projects/ProjectContributors'
 import ProjectHeader from '@/components/projects/ProjectHeader'
 import ProjectTasks from '@/components/projects/ProjectTasks'
+import { getCurrentUser } from '@/lib/auth/currentUser'
 import { getProject } from '@/lib/projects/api'
 import { getProjectPeople } from '@/lib/projects/people'
 
@@ -20,12 +21,14 @@ const ProjectDetails = async ({ params }: ProjectDetailsProps) => {
     // Unknown project, or a project the user is not a member of: same 404 page
     if (!project) notFound()
 
+    const user = await getCurrentUser()
+
     return (
         <div className="flex flex-col gap-10">
             <ProjectHeader project={project} />
             <ProjectContributors project={project} />
             <Suspense fallback={<p role="status" className="text-neutral-grey-800">Chargement des tâches…</p>}>
-                <ProjectTasks projectId={project.id} people={getProjectPeople(project)} />
+                <ProjectTasks projectId={project.id} people={getProjectPeople(project)} currentUserId={user?.id ?? null} />
             </Suspense>
         </div>
     )

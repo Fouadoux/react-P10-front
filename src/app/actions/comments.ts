@@ -22,3 +22,43 @@ export const createCommentAction = async (_previousState: TaskFormState, formDat
     revalidatePath(`/projects/${projectId}`)
     return { message: null, success: true }
 }
+
+// Server Action: runs when a comment is edited. The backend only lets the author do it.
+export const updateCommentAction = async (_previousState: TaskFormState, formData: FormData): Promise<TaskFormState> => {
+    const projectId = String(formData.get('projectId') ?? '')
+    const taskId = String(formData.get('taskId') ?? '')
+    const commentId = String(formData.get('commentId') ?? '')
+    const content = String(formData.get('content') ?? '').trim()
+
+    const response = await authFetch<null>(`/projects/${projectId}/tasks/${taskId}/comments/${commentId}`, {
+        method: 'PUT',
+        body: JSON.stringify({ content }),
+    })
+    if (!response.success) {
+        if (response.data) {
+            return { message: response.data.errors.map(e => e.message).join(', '), success: false }
+        }
+        return { message: response.message, success: false }
+    }
+    revalidatePath(`/projects/${projectId}`)
+    return { message: null, success: true }
+}
+
+// Server Action: runs when the deletion of a comment is confirmed
+export const deleteCommentAction = async (_previousState: TaskFormState, formData: FormData): Promise<TaskFormState> => {
+    const projectId = String(formData.get('projectId') ?? '')
+    const taskId = String(formData.get('taskId') ?? '')
+    const commentId = String(formData.get('commentId') ?? '')
+
+    const response = await authFetch<null>(`/projects/${projectId}/tasks/${taskId}/comments/${commentId}`, {
+        method: 'DELETE',
+    })
+    if (!response.success) {
+        if (response.data) {
+            return { message: response.data.errors.map(e => e.message).join(', '), success: false }
+        }
+        return { message: response.message, success: false }
+    }
+    revalidatePath(`/projects/${projectId}`)
+    return { message: null, success: true }
+}
