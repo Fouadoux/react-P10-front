@@ -10,11 +10,13 @@ type TextFieldProps = {
   onChange: (value: string) => void
   autoComplete?: 'off' | 'email' | 'current-password' | 'new-password' | 'given-name' | 'family-name'
   placeholder?: string
+  // The mockup writes the values of the forms in small grey text (12px, grey-500) instead of the 16px default
+  mutedValue?: boolean
 }
 
-const TextField = ({ label, name, type, value, onChange, autoComplete, placeholder }: TextFieldProps) => (
+const TextField = ({ label, name, type, value, onChange, autoComplete, placeholder, mutedValue }: TextFieldProps) => (
   // The input is inside the label: the browser links them on its own (no htmlFor/id needed)
-  <label className="flex w-full flex-col gap-[7px] text-sm text-black">
+  <label className="flex w-full flex-col gap-[5px] text-sm text-black">
     {label}
     <input
       name={name}
@@ -23,7 +25,7 @@ const TextField = ({ label, name, type, value, onChange, autoComplete, placehold
       onChange={(e) => onChange(e.target.value)}
       autoComplete={autoComplete}
       placeholder={placeholder}
-      className="h-[53px] w-full rounded-[4px] border border-neutral-grey-200 bg-neutral-white px-[17px] focus:border-brand-dark-orange focus:outline-none focus:ring-1 focus:ring-brand-dark-orange"
+      className={`h-[53px] w-full rounded-[4px] border border-neutral-grey-200 bg-neutral-white px-[17px] focus:border-brand-dark-orange focus:outline-none focus:ring-1 focus:ring-brand-dark-orange ${mutedValue ? 'text-xs text-neutral-grey-500' : ''}`}
     />
   </label>
 )

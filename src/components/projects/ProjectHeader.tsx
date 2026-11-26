@@ -25,7 +25,7 @@ const ProjectHeader = ({project}: ProjectHeaderProps) => (
             </Link>
             <div className="flex flex-col gap-3">
                 <div className="flex flex-wrap items-baseline gap-4">
-                    <h1 className="font-heading text-2xl font-semibold text-neutral-grey-950">{project.name}</h1>
+                    <h1 className="font-heading text-2xl font-semibold text-neutral-grey-800">{project.name}</h1>
                     {project.userRole === 'ADMIN' &&
                         (
                             <>
@@ -34,7 +34,7 @@ const ProjectHeader = ({project}: ProjectHeaderProps) => (
                             </>
                         )}
                 </div>
-                {project.description && <p className="text-base text-neutral-grey-500">{project.description}</p>}
+                {project.description && <p className="text-lg text-neutral-grey-500">{project.description}</p>}
             </div>
         </div>
         <div className="flex flex-wrap items-center gap-4">

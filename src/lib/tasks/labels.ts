@@ -10,9 +10,9 @@ export const STATUS_LABELS: Record<TaskStatus, string> = {
 
 // One look per status, taken from the mockup colors
 export const STATUS_CLASSES: Record<TaskStatus, string> = {
-    TODO: 'bg-red-50 text-red-500',
-    IN_PROGRESS: 'bg-amber-50 text-amber-500',
-    DONE: 'bg-green-50 text-green-600',
+    TODO: 'bg-status-todo-bg text-status-todo-text',
+    IN_PROGRESS: 'bg-status-progress-bg text-status-progress-text',
+    DONE: 'bg-status-done-bg text-status-done-text',
     CANCELLED: 'bg-neutral-grey-50 text-neutral-grey-800',
 }
 

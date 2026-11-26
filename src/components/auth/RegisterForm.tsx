@@ -20,7 +20,7 @@ const RegisterForm = () => {
             <TextField label="Email" name="email" type="email" autoComplete="email" value={email} onChange={setEmail} />
             <TextField label="Mot de passe" name="password" type="password" autoComplete="new-password" value={password} onChange={setPassword} />
             {state.message && <p role="alert" className="text-red-500">{state.message}</p>}
-            <Button label="S'inscrire" type="submit" disabled={isPending} />
+            <Button label="S’inscrire" type="submit" disabled={isPending} />
         </form>
     )
 }

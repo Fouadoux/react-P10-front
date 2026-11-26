@@ -14,12 +14,14 @@ type AiTasksPanelProps = {
     projectId: string
     // Called once the tasks are added to the project, so the modal can close
     onClose: () => void
+    // Told whether the list holds at least one task (the modal changes its title accordingly)
+    onHasTasksChange: (hasTasks: boolean) => void
 }
 
 // Content of the "IA" modal: the review list of the generated tasks (edit, delete, add one by hand)
 // and, at the bottom, the box where the user describes the tasks they want.
 // 'use client' because the list is edited in the browser before anything is saved.
-const AiTasksPanel = ({ projectId, onClose }: AiTasksPanelProps) => {
+const AiTasksPanel = ({ projectId, onClose, onHasTasksChange }: AiTasksPanelProps) => {
     const [generateState, generateAction, isGenerating] = useActionState(generateTasksAction, initialGenerateState)
     const [addState, addAction, isAdding] = useActionState(addGeneratedTasksAction, initialAddState)
     const [tasks, setTasks] = useState<DraftTask[]>([])
@@ -47,6 +49,11 @@ const AiTasksPanel = ({ projectId, onClose }: AiTasksPanelProps) => {
         if (addState.success) onClose()
     }, [addState.success, onClose])
 
+    const hasTasks = tasks.length > 0
+    useEffect(() => {
+        onHasTasksChange(hasTasks)
+    }, [hasTasks, onHasTasksChange])
+
     const updateTask = (id: string, patch: Partial<GeneratedTask>) =>
         setTasks(previous => previous.map(task => (task.id === id ? { ...task, ...patch } : task)))
     const deleteTask = (id: string) => setTasks(previous => previous.filter(task => task.id !== id))
@@ -57,17 +64,11 @@ const AiTasksPanel = ({ projectId, onClose }: AiTasksPanelProps) => {
     const canAdd = tasks.length > 0 && tasks.every(task => !isBlank(task.title) && !isBlank(task.description) && task.dueDate !== '')
 
     return (
-        <div className="flex flex-col gap-8">
-            {tasks.length === 0 && (
-                <p className="text-base text-neutral-grey-800">
-                    Décrivez les tâches que vous souhaitez ajouter : l&apos;IA vous propose une liste que vous pourrez modifier avant de l&apos;intégrer au projet.
-                </p>
-            )}
-
+        // sm:-mx-[21px]: the mockup lays the cards and the prompt box out on 494px, wider than the 452px of the form
+        <div className="flex flex-col gap-8 sm:-mx-[21px]">
             {tasks.length > 0 && (
-                <section aria-labelledby="ai-tasks-title" className="flex flex-col gap-6">
-                    <h3 id="ai-tasks-title" className="text-xl text-neutral-grey-950">Vos tâches…</h3>
-                    <ul className="flex flex-col gap-4">
+                <section aria-label="Vos tâches" className="flex flex-col gap-6">
+                    <ul className="flex flex-col gap-6">
                         {tasks.map(task => (
                             <AiTaskCard
                                 key={task.id}
@@ -89,7 +90,7 @@ const AiTasksPanel = ({ projectId, onClose }: AiTasksPanelProps) => {
                         <input type="hidden" name="tasks" value={JSON.stringify(tasks)} />
                         {addState.message && <p role="alert" className="text-red-700">{addState.message}</p>}
                         {!canAdd && <p id="ai-add-hint" className="text-sm text-neutral-grey-800">Chaque tâche doit avoir un titre, une description et une échéance.</p>}
-                        <Button label="+ Ajouter les tâches" type="submit" disabled={isAdding || !canAdd} />
+                        <Button label="+ Ajouter les tâches" type="submit" disabled={isAdding || !canAdd} widthClassName="w-[181px]" />
                     </form>
                 </section>
             )}
@@ -99,26 +100,26 @@ const AiTasksPanel = ({ projectId, onClose }: AiTasksPanelProps) => {
             {isGenerating && <p role="status" className="text-sm text-neutral-grey-800">Génération en cours…</p>}
 
             {/* The prompt box of the mockup: a round field with the orange send button on its right */}
-            <form action={generateAction} className="flex items-center gap-3 rounded-[30px] bg-neutral-grey-50 py-3 pl-8 pr-4">
+            <form action={generateAction} className="flex h-[60px] items-center gap-3 rounded-[80px] bg-neutral-grey-50 pl-8 pr-[18px]">
                 <input type="hidden" name="projectId" value={projectId} />
                 <label htmlFor="ai-prompt" className="sr-only">Décrivez les tâches que vous souhaitez ajouter</label>
                 <textarea
                     id="ai-prompt"
                     name="prompt"
-                    rows={2}
+                    rows={1}
                     maxLength={4000}
                     value={prompt}
                     onChange={event => setPrompt(event.target.value)}
                     placeholder="Décrivez les tâches que vous souhaitez ajouter…"
-                    className="w-full resize-none bg-transparent py-2 text-sm text-neutral-grey-950 placeholder:text-neutral-grey-800 focus:outline-none"
+                    className="max-h-10 w-full resize-none bg-transparent text-sm text-neutral-grey-950 placeholder:text-[10px] placeholder:text-black field-sizing-content focus:outline-none"
                 />
                 <button
                     type="submit"
                     disabled={isGenerating || isBlank(prompt)}
                     aria-label="Générer les tâches"
-                    className="flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-full bg-brand-dark-orange text-neutral-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-grey-950 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-full bg-brand-dark-orange text-neutral-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-grey-950 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z" />
                     </svg>
                 </button>

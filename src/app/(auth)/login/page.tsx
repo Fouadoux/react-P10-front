@@ -12,9 +12,11 @@ export default function LoginPage() {
             <section className="relative z-10 flex w-full shrink-0 flex-col items-center justify-between bg-neutral-grey-50 px-6 py-[55px] lg:w-140.5 lg:px-[140px]">
                 <Logo />
                 <div className="flex w-full flex-col items-center gap-7.5">
-                    <h1 className="text-center font-heading text-[40px] font-bold text-brand-dark-orange">Connexion</h1>
+                    <h1 className="-mb-1 text-center font-heading text-[40px] font-bold text-brand-dark-orange">Connexion</h1>
                     <LoginForm />
-                    <TextLink label="Mot de passe oublié?" href="/forgot-password" />
+                    <div className="-mt-2.5">
+                        <TextLink label="Mot de passe oublié?" href="/forgot-password" />
+                    </div>
                 </div>
                 <p className="flex w-full items-center gap-2.5 text-sm text-black">
                     Pas encore de compte ?

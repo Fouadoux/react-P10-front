@@ -11,6 +11,17 @@
   --color-neutral-grey-800: #1f1f1f;
   --color-neutral-grey-950: #0f0f0f;
 
+  /* Status badges: backgrounds from the mockup. The mockup text colors (#ef4444, #e08d00, #27ae60, #d3590b)
+     reach only 2.3 to 3.4 of contrast on these backgrounds; these darker shades of the same hues reach 4.5 (WCAG AA). */
+  --color-status-todo-bg: #ffe0e0;
+  --color-status-todo-text: #cd1212;
+  --color-status-progress-bg: #fff0d7;
+  --color-status-progress-text: #996000;
+  --color-status-done-bg: #f1fff7;
+  --color-status-done-text: #1d8248;
+  /* Orange text on the light orange background (the "Propriétaire" pill) */
+  --color-brand-orange-text: #af4a09;
+
   /* Variables injected by next/font in layout.tsx */
   --font-heading: var(--font-manrope);
   --font-body: var(--font-inter);

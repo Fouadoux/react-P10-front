@@ -43,18 +43,18 @@ const AccountForm = ({ user }: AccountFormProps) => {
 
     return (
         <form action={formAction} className="flex w-full flex-col gap-6">
-            <TextField label="Prénom" name="firstName" type="text" autoComplete="given-name" value={firstName} onChange={setFirstName} />
-            <TextField label="Nom" name="lastName" type="text" autoComplete="family-name" value={lastName} onChange={setLastName} />
-            <TextField label="Email" name="email" type="email" autoComplete="email" value={email} onChange={setEmail} />
+            <TextField label="Nom" name="lastName" type="text" autoComplete="family-name" value={lastName} onChange={setLastName} mutedValue />
+            <TextField label="Prénom" name="firstName" type="text" autoComplete="given-name" value={firstName} onChange={setFirstName} mutedValue />
+            <TextField label="Email" name="email" type="email" autoComplete="email" value={email} onChange={setEmail} mutedValue />
             <fieldset className="flex flex-col gap-6">
                 <legend className="mb-2 text-sm text-neutral-grey-800">Changer de mot de passe (facultatif)</legend>
-                <TextField label="Mot de passe actuel" name="currentPassword" type="password" autoComplete="current-password" value={currentPassword} onChange={setCurrentPassword} />
-                <TextField label="Nouveau mot de passe" name="newPassword" type="password" autoComplete="new-password" value={newPassword} onChange={setNewPassword} />
+                <TextField label="Mot de passe actuel" name="currentPassword" type="password" autoComplete="current-password" value={currentPassword} onChange={setCurrentPassword} mutedValue />
+                <TextField label="Nouveau mot de passe" name="newPassword" type="password" autoComplete="new-password" value={newPassword} onChange={setNewPassword} mutedValue />
             </fieldset>
             {state.message && <p role="alert" className="text-red-700">{state.message}</p>}
             {state.success && <p role="status" className="text-green-700">Vos informations ont bien été modifiées.</p>}
             <div>
-                <Button label="Modifier les informations" type="submit" disabled={isPending || !canSubmit} />
+                <Button label="Modifier les informations" type="submit" disabled={isPending || !canSubmit} widthClassName="w-[242px]" />
             </div>
         </form>
     )
