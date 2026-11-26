@@ -14,7 +14,7 @@ const ProjectsList = async () => {
     }
 
     return (
-        <ul className="grid grid-cols-1 gap-[14px] md:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid grid-cols-1 gap-x-[14px] gap-y-[18px] md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project, index) => (
                 <li key={project.id}>
                     <ProjectCard project={project} progress={getProjectProgress(taskLists[index])} />

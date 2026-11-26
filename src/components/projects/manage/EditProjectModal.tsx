@@ -17,10 +17,9 @@ const triggerClassName = 'cursor-pointer text-sm text-brand-dark-orange underlin
 const EditProjectModal = ({ project }: EditProjectModalProps) => (
     <Modal triggerLabel="Modifier" title="Modifier un projet" triggerClassName={triggerClassName}>
         {close => (
-            <div className="flex w-full flex-col gap-6">
-                <EditProjectForm project={project} onSuccess={close} />
+            <EditProjectForm project={project} onSuccess={close}>
                 <ContributorsEditor project={project} />
-            </div>
+            </EditProjectForm>
         )}
     </Modal>
 )

@@ -30,8 +30,8 @@ const CreateProjectForm = ({ onSuccess }: CreateProjectFormProps) => {
 
     return (
         <form action={formAction} className="flex w-full flex-col items-start gap-6">
-            <TextField label="Titre*" name="name" type="text" value={name} onChange={setName} />
-            <TextField label="Description*" name="description" type="text" value={description} onChange={setDescription} />
+            <TextField label="Titre*" name="name" type="text" value={name} onChange={setName} mutedValue />
+            <TextField label="Description*" name="description" type="text" value={description} onChange={setDescription} mutedValue />
             <TextField
                 label="Contributeurs"
                 name="contributors"
@@ -39,9 +39,10 @@ const CreateProjectForm = ({ onSuccess }: CreateProjectFormProps) => {
                 placeholder="alice@example.com, bob@example.com"
                 value={contributors}
                 onChange={setContributors}
+                mutedValue
             />
             {state.message && <p role="alert" className="text-red-500">{state.message}</p>}
-            <Button label="Ajouter un projet" type="submit" disabled={isPending || !canSubmit} />
+            <Button label="Ajouter un projet" type="submit" disabled={isPending || !canSubmit} widthClassName="w-[181px]" />
         </form>
     )
 }

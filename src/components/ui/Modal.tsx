@@ -14,7 +14,7 @@ type ModalProps = {
     triggerClassName?: string
 }
 
-const defaultTriggerClassName = 'cursor-pointer rounded-[6px] bg-neutral-grey-950 px-6 py-3.5 text-base text-neutral-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-dark-orange'
+const defaultTriggerClassName = 'h-[50px] cursor-pointer rounded-[10px] bg-neutral-grey-800 px-[26px] text-base text-neutral-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-dark-orange'
 
 // A button and the modal window it opens
 const Modal = ({ triggerLabel, title, children, triggerClassName = defaultTriggerClassName }: ModalProps) => {

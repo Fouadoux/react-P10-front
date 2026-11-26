@@ -15,12 +15,12 @@ const ContributorsEditor = ({ project }: ContributorsEditorProps) => {
     const otherMembers = project.members.filter(member => member.userId !== project.ownerId)
 
     return (
-        <section aria-label="Contributeurs" className="flex w-full flex-col gap-4 border-t border-neutral-grey-200 pt-6">
-            <h3 className="text-base text-neutral-grey-950">Contributeurs</h3>
+        <section aria-label="Contributeurs" className="flex w-full flex-col gap-4">
+            <h3 className="text-sm text-black">Contributeurs</h3>
             <ul className="flex flex-col gap-3">
                 <li className="flex items-center justify-between gap-4 text-sm text-neutral-grey-950">
                     <span>{getDisplayName(project.owner)}</span>
-                    <span className="rounded-full bg-brand-light-orange px-3 py-1 text-xs text-brand-dark-orange">Propriétaire</span>
+                    <span className="rounded-full bg-brand-light-orange px-4 py-1 text-sm leading-[17px] text-brand-orange-text">Propriétaire</span>
                 </li>
                 {otherMembers.map(member => (
                     <li key={member.id} className="flex items-start justify-between gap-4 text-sm text-neutral-grey-950">

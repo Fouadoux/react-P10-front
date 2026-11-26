@@ -3,6 +3,7 @@
 import { useActionState, useEffect, useState } from 'react'
 import type { TaskFormState } from '@/app/actions/tasks'
 import Button from '@/components/ui/Button'
+import MultiSelectField from '@/components/ui/MultiSelectField'
 import TextField from '@/components/ui/TextField'
 import { isBlank } from '@/lib/forms/isBlank'
 import { STATUS_CLASSES, STATUS_LABELS } from '@/lib/tasks/labels'
@@ -47,6 +48,9 @@ const TaskForm = ({ action, projectId, taskId, people, initialValues = EMPTY_VAL
     const [title, setTitle] = useState<string>(initialValues.title)
     const [description, setDescription] = useState<string>(initialValues.description)
     const [dueDate, setDueDate] = useState<string>(initialValues.dueDate)
+    const [assigneeIds, setAssigneeIds] = useState<string[]>(initialValues.assigneeIds)
+    // The mockup marks the required fields with * on the creation form only, not on the edit one
+    const required = taskId ? '' : '*'
     // The fields marked with * must be filled. When editing, the fields start filled, so the button starts enabled.
     const canSubmit = !isBlank(title) && !isBlank(description) && !isBlank(dueDate)
 
@@ -59,26 +63,19 @@ const TaskForm = ({ action, projectId, taskId, people, initialValues = EMPTY_VAL
         <form action={formAction} className="flex w-full flex-col items-start gap-6">
             <input type="hidden" name="projectId" value={projectId} />
             {taskId && <input type="hidden" name="taskId" value={taskId} />}
-            <TextField label="Titre*" name="title" type="text" value={title} onChange={setTitle} />
-            <TextField label="Description*" name="description" type="text" value={description} onChange={setDescription} />
-            <TextField label="Échéance*" name="dueDate" type="date" value={dueDate} onChange={setDueDate} />
+            <TextField label={`Titre${required}`} name="title" type="text" value={title} onChange={setTitle} mutedValue />
+            <TextField label={`Description${required}`} name="description" type="text" value={description} onChange={setDescription} mutedValue />
+            <TextField label={`Échéance${required}`} name="dueDate" type="date" value={dueDate} onChange={setDueDate} mutedValue />
 
-            {/* Checkboxes sharing the same name: the action reads them all with formData.getAll('assigneeIds') */}
-            <fieldset className="flex w-full flex-col gap-2">
-                <legend className="mb-2 text-sm text-black">Assigné à :</legend>
-                {people.map(person => (
-                    <label key={person.id} className="flex items-center gap-3 text-sm text-neutral-grey-950">
-                        <input
-                            type="checkbox"
-                            name="assigneeIds"
-                            value={person.id}
-                            defaultChecked={initialValues.assigneeIds.includes(person.id)}
-                            className="size-4 accent-brand-dark-orange"
-                        />
-                        {getDisplayName(person)}
-                    </label>
-                ))}
-            </fieldset>
+            {/* Dropdown with checkboxes: it sends one hidden "assigneeIds" input per person, read by the action with formData.getAll('assigneeIds') */}
+            <MultiSelectField
+                label="Assigné à :"
+                name="assigneeIds"
+                options={people.map(person => ({ id: person.id, label: getDisplayName(person) }))}
+                selectedIds={assigneeIds}
+                onChange={setAssigneeIds}
+                placeholder="Choisir un ou plusieurs collaborateurs"
+            />
 
             {/* Radio buttons shown as the status badges of the mockup */}
             <fieldset className="flex flex-col gap-3">
@@ -87,7 +84,7 @@ const TaskForm = ({ action, projectId, taskId, people, initialValues = EMPTY_VAL
                     {FORM_STATUSES.map(status => (
                         <label key={status} className="cursor-pointer">
                             <input type="radio" name="status" value={status} defaultChecked={status === initialValues.status} className="peer sr-only" />
-                            <span className={`block rounded-full px-4 py-1 text-sm peer-checked:ring-2 peer-checked:ring-current peer-focus-visible:ring-2 peer-focus-visible:ring-brand-dark-orange ${STATUS_CLASSES[status]}`}>
+                            <span className={`block rounded-full px-4 py-1 text-sm leading-[17px] peer-checked:ring-2 peer-checked:ring-current peer-focus-visible:ring-2 peer-focus-visible:ring-brand-dark-orange ${STATUS_CLASSES[status]}`}>
                                 {STATUS_LABELS[status]}
                             </span>
                         </label>
@@ -96,7 +93,7 @@ const TaskForm = ({ action, projectId, taskId, people, initialValues = EMPTY_VAL
             </fieldset>
 
             {state.message && <p role="alert" className="text-red-500">{state.message}</p>}
-            <Button label={submitLabel} type="submit" disabled={isPending || !canSubmit} />
+            <Button label={submitLabel} type="submit" disabled={isPending || !canSubmit} widthClassName={taskId ? 'w-[244px]' : 'w-[181px]'} />
         </form>
     )
 }

@@ -12,6 +12,19 @@ type ModalDialogProps = {
     children: ReactNode
 }
 
+// Makes sure the <dialog> is open AND modal (in the top layer, with its dimmed backdrop).
+// A dialog that is `open` but no longer modal looks like our bug: the backdrop is gone and the page behind is clickable.
+const ensureModal = (dialog: HTMLDialogElement): void => {
+    if (!dialog.open) {
+        dialog.showModal()
+    } else if (!dialog.matches(':modal')) {
+        // showModal() throws on a dialog that is already open: remove the attribute first.
+        // (dialog.close() would also fire the "close" event, which would close our modal for good.)
+        dialog.removeAttribute('open')
+        dialog.showModal()
+    }
+}
+
 // A modal window built on the native <dialog> element: the browser itself keeps the focus
 // inside the window, closes it with the Escape key and dims the page.
 // The parent owns the "open" state: this component only follows it.
@@ -23,9 +36,31 @@ const ModalDialog = ({ isOpen, onClose, title, children }: ModalDialogProps) => 
     useEffect(() => {
         const dialog = dialogRef.current
         if (!dialog) return
-        if (isOpen && !dialog.open) dialog.showModal()
+        if (isOpen) ensureModal(dialog)
         if (!isOpen && dialog.open) dialog.close()
     }, [isOpen])
+
+    // While the window is open, react when the visitor leaves the page (macOS trackpad swipe between windows,
+    // tab switch...). The browser may drop the <dialog> from the top layer in the meantime, which used to leave it
+    // open without its dimmed backdrop: we close the window as soon as the page is hidden instead.
+    useEffect(() => {
+        if (!isOpen) return
+        const closeWhenHidden = () => {
+            if (document.hidden) onClose()
+        }
+        // Safety net for a page that comes back with an open <dialog> that is no longer modal
+        const restoreModal = () => {
+            if (dialogRef.current) ensureModal(dialogRef.current)
+        }
+        document.addEventListener('visibilitychange', closeWhenHidden)
+        window.addEventListener('pageshow', restoreModal)
+        window.addEventListener('focus', restoreModal)
+        return () => {
+            document.removeEventListener('visibilitychange', closeWhenHidden)
+            window.removeEventListener('pageshow', restoreModal)
+            window.removeEventListener('focus', restoreModal)
+        }
+    }, [isOpen, onClose])
 
     // A click on the dimmed area lands on the <dialog> itself (the white card is an inner element)
     const closeOnBackdropClick = (event: MouseEvent<HTMLDialogElement>) => {
@@ -52,7 +87,7 @@ const ModalDialog = ({ isOpen, onClose, title, children }: ModalDialogProps) => 
                         <path d="M2 2l12 12M14 2L2 14" />
                     </svg>
                 </button>
-                <h2 id={titleId} className="text-2xl text-neutral-grey-950">{title}</h2>
+                <h2 id={titleId} className="font-heading text-2xl font-semibold text-neutral-grey-800">{title}</h2>
                 {isOpen && children}
             </div>
         </dialog>

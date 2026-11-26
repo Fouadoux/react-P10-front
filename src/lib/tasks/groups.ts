@@ -11,7 +11,7 @@ export type KanbanColumns = Record<Exclude<TaskStatus, 'CANCELLED'>, Task[]>
  * @param today the current date (passed in, not read here, so the function stays predictable)
  * @returns     the tasks of the month, in the same order
  */
-export const getTasksOfMonth = (tasks: Task[], today: Date): Task[] => {
+export const getTasksOfMonth = <T extends { dueDate: string | null }>(tasks: T[], today: Date): T[] => {
     return tasks.filter(task => {
         if (!task.dueDate) return false
         const date = new Date(task.dueDate)

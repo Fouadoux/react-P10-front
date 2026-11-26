@@ -17,7 +17,7 @@ const ProjectCard = ({ project, progress }: ProjectCardProps) => {
     return (
         <article className="relative flex min-h-[351px] flex-col justify-between gap-6 rounded-[10px] border border-neutral-grey-200 bg-neutral-white px-[34px] py-[30px]">
             <div className="flex flex-col gap-2">
-                <h3 className="text-xl leading-[1.25] text-neutral-grey-950">
+                <h3 className="font-heading text-lg font-semibold leading-[1.25] text-neutral-grey-800">
                     {/* Stretched link: the whole card is clickable, but only the title is read as a link */}
                     <Link
                         href={`/projects/${project.id}`}
@@ -26,7 +26,7 @@ const ProjectCard = ({ project, progress }: ProjectCardProps) => {
                         {project.name}
                     </Link>
                 </h3>
-                {project.description && <p className="line-clamp-2 text-xs leading-[17px] text-neutral-grey-500">{project.description}</p>}
+                {project.description && <p className="line-clamp-2 text-sm leading-[17px] text-neutral-grey-500">{project.description}</p>}
             </div>
 
             <div className="flex flex-col gap-4">
@@ -61,7 +61,7 @@ const ProjectCard = ({ project, progress }: ProjectCardProps) => {
                         <span className="flex size-[27px] items-center justify-center rounded-full bg-brand-light-orange text-[10px] text-neutral-grey-950">
                             {getInitials(project.owner)}
                         </span>
-                        <span className="rounded-full bg-brand-light-orange px-3 py-1 text-xs text-brand-dark-orange">Propriétaire</span>
+                        <span className="rounded-full bg-brand-light-orange px-4 py-1 text-sm leading-[17px] text-brand-orange-text">Propriétaire</span>
                     </li>
                     {otherMembers.map(member => (
                         <li

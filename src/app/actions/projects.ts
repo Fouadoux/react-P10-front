@@ -30,7 +30,8 @@ export const createProjectAction = async (_previousState: CreateProjectState, fo
         return { message: response.message, success: false }
     }
     revalidatePath('/projects')
-    return { message: null, success: true }
+    // The new project's page: redirect() ends the action, nothing is returned after it
+    redirect(`/projects/${response.data.project.id}`)
 }
 
 export const updateProjectAction = async (_previousState: CreateProjectState, formData: FormData): Promise<CreateProjectState> => {

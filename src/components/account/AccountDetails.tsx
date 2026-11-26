@@ -8,9 +8,9 @@ const AccountDetails = async () => {
     const user = await getCurrentUser()
 
     return (
-        <section aria-labelledby="account-title" className="flex flex-col gap-10 rounded-[10px] border border-neutral-grey-200 bg-neutral-white p-[58px]">
+        <section aria-labelledby="account-title" className="flex flex-col gap-10 rounded-[10px] border border-neutral-grey-200 bg-neutral-white px-[59px] py-10">
             <header className="flex flex-col gap-2">
-                <h1 id="account-title" className="font-heading text-xl font-semibold text-neutral-grey-950">Mon compte</h1>
+                <h1 id="account-title" className="font-heading text-lg font-semibold text-neutral-grey-800">Mon compte</h1>
                 <p className="text-base text-neutral-grey-500">{getDisplayName(user)}</p>
             </header>
             {/* No user means the session is no longer valid: the proxy / authFetch send the visitor back to /login */}

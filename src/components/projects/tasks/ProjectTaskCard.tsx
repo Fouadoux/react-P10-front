@@ -10,11 +10,13 @@ type ProjectTaskCardProps = {
     task: ProjectTask
     // The members of the project (needed by the edit modal of the "…" menu)
     people: UserSummary[]
+    // The logged-in user (null if unknown), to know which comments they can edit
+    currentUserId: string | null
 }
 
 // A task of the project page: title and status badge, description, due date, assignees, number of comments,
 // and the "…" menu (edit, delete)
-const ProjectTaskCard = ({ task, people }: ProjectTaskCardProps) => {
+const ProjectTaskCard = ({ task, people, currentUserId }: ProjectTaskCardProps) => {
     return (
         <article className="relative flex flex-col gap-6 rounded-[10px] border border-neutral-grey-200 bg-neutral-white px-8 pt-8">
             <div className="absolute right-8 top-8">
@@ -23,8 +25,8 @@ const ProjectTaskCard = ({ task, people }: ProjectTaskCardProps) => {
             <div className="flex flex-col gap-4 pr-16">
                 <div className="flex flex-col gap-1">
                     <div className="flex flex-wrap items-center gap-3">
-                        <h3 className="text-base text-neutral-grey-950">{task.title}</h3>
-                        <span className={`rounded-full px-3 py-1 text-xs ${STATUS_CLASSES[task.status]}`}>
+                        <h3 className="font-heading text-lg font-semibold text-black">{task.title}</h3>
+                        <span className={`rounded-full px-4 py-1 text-sm leading-[17px] ${STATUS_CLASSES[task.status]}`}>
                             {STATUS_LABELS[task.status]}
                         </span>
                     </div>
@@ -48,7 +50,7 @@ const ProjectTaskCard = ({ task, people }: ProjectTaskCardProps) => {
                                     <span className="flex size-[22px] items-center justify-center rounded-full bg-neutral-grey-200 text-[9px] text-neutral-grey-800">
                                         {getInitials(assignee.user)}
                                     </span>
-                                    <span className="rounded-full bg-neutral-grey-200 px-3 py-1 text-neutral-grey-500">
+                                    <span className="rounded-full bg-neutral-grey-200 px-3 py-1 text-sm text-neutral-grey-500">
                                         {getDisplayName(assignee.user)}
                                     </span>
                                 </li>
@@ -58,7 +60,7 @@ const ProjectTaskCard = ({ task, people }: ProjectTaskCardProps) => {
                 </div>
             </div>
 
-            <TaskComments projectId={task.projectId} taskId={task.id} comments={task.comments} />
+            <TaskComments projectId={task.projectId} taskId={task.id} comments={task.comments} currentUserId={currentUserId} />
         </article>
     )
 }

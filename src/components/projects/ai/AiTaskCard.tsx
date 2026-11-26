@@ -8,7 +8,7 @@ import { formatDueDate, STATUS_LABELS } from '@/lib/tasks/labels'
 
 const STATUSES: GeneratedTaskStatus[] = ['TODO', 'IN_PROGRESS', 'DONE']
 
-const linkButtonClass = 'flex cursor-pointer items-center gap-1 text-sm text-neutral-grey-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-dark-orange'
+const linkButtonClass = 'flex cursor-pointer items-center gap-1 text-xs text-neutral-grey-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-dark-orange'
 
 type AiTaskCardProps = {
     task: DraftTask
@@ -24,7 +24,7 @@ const AiTaskCard = ({ task, onChange, onDelete }: AiTaskCardProps) => {
     const label = isBlank(task.title) ? 'sans titre' : task.title
 
     return (
-        <li className="flex flex-col gap-4 rounded-[10px] border border-neutral-grey-200 bg-neutral-white p-6">
+        <li className="flex flex-col gap-4 rounded-[10px] border border-neutral-grey-200 bg-neutral-white px-10 py-[25px]">
             {isEditing ? (
                 <div className="flex flex-col gap-4">
                     <TextField label="Titre*" name="title" type="text" value={task.title} onChange={title => onChange({ title })} />
@@ -43,7 +43,7 @@ const AiTaskCard = ({ task, onChange, onDelete }: AiTaskCardProps) => {
                 </div>
             ) : (
                 <div className="flex flex-col gap-2">
-                    <h3 className="text-base text-black">{task.title}</h3>
+                    <h3 className="font-heading text-lg font-semibold text-black">{task.title}</h3>
                     <p className="text-sm text-neutral-grey-500">{task.description}</p>
                     <p className="text-sm text-neutral-grey-800">
                         {STATUS_LABELS[task.status]}
