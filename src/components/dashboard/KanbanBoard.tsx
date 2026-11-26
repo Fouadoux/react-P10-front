@@ -1,22 +1,16 @@
-import KanbanColumn from '@/components/dashboard/KanbanColumn'
+import KanbanDragBoard from '@/components/dashboard/KanbanDragBoard'
 import { getAssignedTasks } from '@/lib/tasks/api'
-import { getTasksOfMonth, groupTasksByStatus } from '@/lib/tasks/groups'
+import { getTasksOfMonth } from '@/lib/tasks/groups'
 
-// Kanban view: the assigned tasks due this month, split into one column per status.
+// Kanban view: the assigned tasks due this month. They are fetched here, on the server;
+// the columns and the drag and drop live in KanbanDragBoard (browser side).
 // Must be rendered inside a <Suspense> (it reads the session cookie at request time).
 const KanbanBoard = async () => {
     const tasks = await getAssignedTasks()
     const today = new Date()
     const tasksOfMonth = getTasksOfMonth(tasks, today)
-    const { TODO, IN_PROGRESS, DONE } = groupTasksByStatus(tasksOfMonth)
 
-    return (
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
-            <KanbanColumn title="À faire" tasks={TODO} />
-            <KanbanColumn title="En cours" tasks={IN_PROGRESS} />
-            <KanbanColumn title="Terminées" tasks={DONE} />
-        </div>
-    )
+    return <KanbanDragBoard tasks={tasksOfMonth} />
 }
 
 export default KanbanBoard

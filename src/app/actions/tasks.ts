@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { authFetch } from '@/lib/api/client'
-import type { CreateTaskData } from '@/types'
+import type { CreateTaskData, TaskStatus } from '@/types'
 
 // State shared by the task forms (create, edit, delete)
 export type TaskFormState = {
@@ -76,6 +76,28 @@ export const deleteTaskAction = async (_previousState: TaskFormState, formData: 
     const response = await authFetch<TaskFormState>(`/projects/${projectId}/tasks/${taskId}`,
         {
             method: 'DELETE',
+        })
+
+    if (!response.success) {
+        if (response.data) {
+            return { message: response.data.errors.map(e => e.message).join(', '), success: false }
+        }
+        return { message: response.message, success: false }
+    }
+
+    revalidatePath(`/projects/${projectId}`)
+    return { message: null, success: true }
+}
+
+// Server Action: runs when a task is dropped in another column of the Kanban. Only its status changes.
+export const updateTaskStatusAction = async (projectId: string, taskId: string, status: TaskStatus): Promise<TaskFormState> => {
+    if(status!='TODO' && status!='IN_PROGRESS' && status!='DONE'){
+        return { message: 'erreur de status', success: false }
+    }
+    const response = await authFetch<TaskFormState>(`/projects/${projectId}/tasks/${taskId}`,
+        {
+            method: 'PUT',
+            body: JSON.stringify({ status }),
         })
 
     if (!response.success) {
