@@ -72,7 +72,9 @@ export const askLlm = async (systemPrompt: string, userMessage: string): Promise
         })
 
         if (!response.ok) {
-            console.error(`The AI provider answered ${response.status}`)
+            // The provider's own explanation (which limit was hit, which model is refused...) goes to the server log only
+            const details = await response.text().catch(() => '')
+            console.error(`The AI provider answered ${response.status}`, details.slice(0, 500), response.headers.get('retry-after') ? `(retry-after: ${response.headers.get('retry-after')}s)` : '')
             if (response.status === 429) return { ok: false, message: "Trop de demandes à l'IA, réessayez dans un instant." }
             return { ok: false, message: "L'IA est momentanément indisponible, réessayez plus tard." }
         }
